@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo-List</title>
-    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="assets/style/style.css">
-</head>
-<body>
-    <section id="todo-list" class="todo-lis">
-        <h1>TO DO LIST</h1>
-        <section class="card cardDone">
+    <link
+      rel="shortcut icon"
+      href="assets/images/favicon.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="assets/style/style.css" />
+  </head>
+  <body>
+    <section id="todo-list">
+      <h1>TO DO LIST</h1>
+      <section>
+          <section class="card cardDone">
             <article>
-                <header>
-                    <h1 class="titleCard"> Tarefas Feitas</h1>
-                </header>
-                <main>
-                    <ul class="ulDone">
-                    </ul>
-                </main>
-                <footer>
-                    <button class="btnCreateTask">
-                        Clique aqui para adicionar uma tarefa feita
-                    </button>
-                </footer>
+              <header>
+                <h1 class="titleCard">Tarefas Feitas</h1>
+              </header>
+              <main>
+                <ul class="ulDone"></ul>
+              </main>
+              <footer>
+                <button class="btnCreateTask">
+                  Clique aqui para adicionar uma tarefa feita
+                </button>
+              </footer>
             </article>
-        </section>
-        <section class="card cardPending">
+          </section>
+          <section class="card cardPending">
             <article>
-                <header>
-                    <h1 class="titleCard">Tarefas Pendentes</h1>
-                </header>
-                <main>
-                    <ul class="ulPending">
-                    </ul>
-                </main>
-                <footer>
-                    <button class="btnCreateTask">
-                        Clique aqui para adicionar uma tarefa feita
-                    </button>
-                </footer>
+              <header>
+                <h1 class="titleCard">Tarefas Pendentes</h1>
+              </header>
+              <main>
+                <ul class="ulPending"></ul>
+              </main>
+              <footer>
+                <button class="btnCreateTask">
+                  Clique aqui para adicionar uma tarefa pendente
+                </button>
+              </footer>
             </article>
-        </section>
+          </section>
+      </section>
+      <button onmousedown="refreshLS()">Limpar todas as tarefas</button>
     </section>
 
-    <button onmousedown="refreshLS()">LIMPAR TODA TO DO LIST</button>
-
     <script src="assets/js/script.js"></script>
-</body>
+  </body>
 </html>

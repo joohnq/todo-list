@@ -6,11 +6,8 @@
     box-sizing: border-box;
 }
 
-:root{
-    font-family: 'Poppins', sans-serif;
-}
-
 body{
+    font-family: 'Poppins', sans-serif;
     background-color: #F3EAF4;
     margin: 20px;
 }
@@ -36,9 +33,28 @@ li{
     list-style: none;
 }
 
+#todo-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 #todo-list > h1{
     font-size: 40px;
     font-weight: 900;
+}
+
+#todo-list > button{
+    padding: 15px;
+
+    font-family: 'Poppins', sans-serif;
+
+    border: 1px solid rgb(64, 64, 64);
+
+    margin-top: 20px;
+
+    border-radius: 20px;
 }
 
 .card h1{
@@ -49,7 +65,7 @@ li{
 .card{
     color: white;
 
-    max-width: 400px;
+    width: 400px;
 
     border-radius: 20px;
     border: 2px solid #a7a7a7;
@@ -58,6 +74,14 @@ li{
     grid-row: 1fr 2fr 1fr;
 
     margin-top: 20px;
+}
+
+.cardDone article main{
+    background-color: forestgreen;
+}
+
+.cardPending article main{
+    background-color: crimson;
 }
 
 article header{
@@ -72,14 +96,6 @@ article header{
 
 article main{
     min-height: 100px;
-}
-
-.card:nth-child(2) article main{
-    background-color: forestgreen;
-}
-
-.card:nth-child(3) article main{
-    background-color: crimson;
 }
 
 article main ul{
@@ -115,4 +131,12 @@ article footer button{
     border-top: 1px solid #a7a7a7;
 
     cursor: pointer;
+}
+
+@media (min-width: 900px) {
+    #todo-list > section{
+        display: flex;
+        align-items: center;
+        gap: 40px;
+    }
 }
