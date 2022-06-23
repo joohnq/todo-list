@@ -14,52 +14,38 @@
         <section class="card cardDone">
             <article>
                 <header>
-                    <h1 class="titleCard">Feitos</h1>
+                    <h1 class="titleCard"> Tarefas Feitas</h1>
                 </header>
                 <main>
-                    <ul>
-                        <div class="task">
-                            <img class="disabled" src="assets/images/check.svg" alt="Check">
-                            <p>Title taks</p>
-                            <img src="assets/images/trash.svg" alt="Lixeira">
-                        </div>
-                        <div class="task">
-                            <img class="disabled" src="assets/images/check.svg" alt="Check">
-                            <p>Title taks</p>
-                            <img src="assets/images/trash.svg" alt="Lixeira">
-                        </div>
+                    <ul class="ulDone">
                     </ul>
                 </main>
                 <footer>
-                    <p>Clique aqui para adicionar uma tarefa feita</p>
+                    <button class="btnCreateTask">
+                        Clique aqui para adicionar uma tarefa feita
+                    </button>
                 </footer>
             </article>
         </section>
         <section class="card cardPending">
             <article>
                 <header>
-                    <h1 class="titleCard">Pendente</h1>
+                    <h1 class="titleCard">Tarefas Pendentes</h1>
                 </header>
                 <main>
-                    <ul>
-                        <div class="task">
-                            <img class="disabled" src="assets/images/check.svg" alt="Check">
-                            <p>Title taks</p>
-                            <img src="assets/images/trash.svg" alt="Lixeira">
-                        </div>
-                        <div class="task">
-                            <img class="disabled" src="assets/images/check.svg" alt="Check">
-                            <p>Title taks</p>
-                            <img src="assets/images/trash.svg" alt="Lixeira">
-                        </div>
+                    <ul class="ulPending">
                     </ul>
                 </main>
                 <footer>
-                    <p>Clique aqui para adicionar uma tarefa feita</p>
+                    <button class="btnCreateTask">
+                        Clique aqui para adicionar uma tarefa feita
+                    </button>
                 </footer>
             </article>
         </section>
     </section>
+
+    <button onmousedown="refreshLS()">LIMPAR TODA TO DO LIST</button>
 
     <script src="assets/js/script.js"></script>
 </body>

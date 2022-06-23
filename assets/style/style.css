@@ -96,12 +96,13 @@ article main ul{
     margin-bottom: 10px;
 }
 
-article footer{
+article footer button{
     width: 100%;
     background-color: white;
 
     border-radius: 0 0 18px 18px;
 
+    font-family: 'Poppins', sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: black;
