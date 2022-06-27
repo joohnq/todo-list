@@ -1,94 +1,73 @@
 "use stick";
-const task = document.querySelectorAll(".task");
-const check = document.querySelectorAll(".check");
+const ulDone = document.querySelector(".ulDone");
+const ulPending = document.querySelector(".ulPending");
 const btnCreateTask = document.querySelectorAll(".btnCreateTask");
-const tasksDone = [];
-const tasksPending = [];
+let tasksDone;
+let tasksPending;
 
-function cleanLS(){
+function getTask() {
+  tasksDone = JSON.parse(localStorage.getItem("tasksDone"));
+  tasksPending = JSON.parse(localStorage.getItem("tasksPending")) 
+  if (tasksDone == null) {
+    tasksDone = [];
+  }
+
+  if (tasksPending == null) {
+    tasksPending = [];
+  }
+}
+getTask()
+
+function createTask(titleTask) {
+  const li = document.createElement("li");
+  li.innerHTML = `${titleTask}
+  <img class="delete" onclick="deleteTask()" src="assets/images/trash.svg">
+  `;
+  return li;
+}
+
+function cleanLS() {
   localStorage.clear();
   location.reload();
 }
 
-function toggleCheck(event){
-    event.target.firstElementChild.classList.toggle("disabled");
+function renderTask() {
+  getTask();
+  ulDone.innerHTML = "";
+  ulPending.innerHTML = "";
+
+  tasksDone.forEach((td) => {
+    ulDone.append(createTask(td.title));
+  });
+
+  tasksPending.forEach((td) => {
+    ulPending.append(createTask(td.title));
+  });
 }
+renderTask();
 
-function markCheck(event){
-    event.target.classList.toggle("checked")
-}
+function saveOnLS(e, titleTask) {
+  const ulTask = e.target.parentNode.previousElementSibling.firstElementChild;
 
-function renderInfosLS(){
-  const tasksDoneLS = JSON.parse(localStorage.getItem("tasksDone"));
-  const tasksPendingLS = JSON.parse(localStorage.getItem("tasksPending"));
-
-  if(tasksDoneLS == null || tasksPendingLS == null){
-    return ''
-  }else{
-    tasksDoneLS.forEach(e => {
-        const ul = document.querySelector('.ulDone')
-        const task = document.createElement("div");
-        task.className = "task";
-        task.setAttribute('onmouseenter', 'toggleCheck(event)')
-        task.setAttribute('onmouseleave', 'toggleCheck(event)')
-        task.setAttribute('onmousedown', 'markCheck(event)')
-        task.innerHTML = `<img class="disabled" src="assets/images/check.svg" alt="Check">
-        <p>${e.title}</p>
-        <img src="assets/images/trash.svg" alt="Lixeira">`;
-        ul.appendChild(task);
-    });
-    
-    tasksPendingLS.forEach(e => {
-        const ul = document.querySelector('.ulPending')
-        const task = document.createElement("div");
-        task.className = "task";
-        task.setAttribute('onmouseenter', 'toggleCheck(event)')
-        task.setAttribute('onmouseleave', 'toggleCheck(event)')
-        task.setAttribute('onmousedown', 'markCheck(event)')
-        task.innerHTML = `<img class="disabled" src="assets/images/check.svg" alt="Check">
-        <p>${e.title}</p>
-        <img src="assets/images/trash.svg" alt="Lixeira">`;
-        ul.appendChild(task);
-    });
+  if (ulTask.classList.contains("ulDone")) {
+    const newDoneTasks = [...tasksDone, { title: titleTask }];
+    localStorage.setItem("tasksDone", JSON.stringify(newDoneTasks));
+  } else if (ulTask.classList.contains("ulPending")) {
+    const newPendingTasks = [...tasksPending, { title: titleTask }];
+    localStorage.setItem("tasksPending", JSON.stringify(newPendingTasks));
   }
 }
 
-btnCreateTask.forEach((t) =>
-  t.addEventListener("click", (e) => {
-    const titleTask = prompt("Digite o titulo da tarefa:");
+function deleteTask(){
+  console.log('deletado')
+}
 
-    function createTask(e, titleTask) {
-      const ul = e.target.parentNode.previousElementSibling.firstElementChild;
-      const task = document.createElement("div");
-      task.className = "task";
-      task.setAttribute('onmouseenter', 'toggleCheck(event)')
-      task.setAttribute('onmouseleave', 'toggleCheck(event)')
-      task.setAttribute('onmousedown', 'markCheck(event)')
-      task.innerHTML = `<img class="disabled" src="assets/images/check.svg" alt="Check">
-        <p>${titleTask}</p>
-        <img src="assets/images/trash.svg" alt="Lixeira">`;
-      ul.appendChild(task);
-    }
+btnCreateTask.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const titleTask = prompt("Digite o título da tarefa:");
+    createTask(titleTask);
+    saveOnLS(e, titleTask);
+    renderTask();
+  });
+});
 
-    if (e.composedPath()[3].classList.contains("cardDone")) {
-      let id = tasksDone.length;
-      tasksDone.push({ title: titleTask, id: id });
-    } else if (e.composedPath()[3].classList.contains("cardPending")) {
-      let id = tasksPending.length;
-      tasksPending.push({ title: titleTask, id: id });
-    }
-
-    let tasksDoneJson = JSON.stringify(tasksDone);
-    let tasksPendingJson = JSON.stringify(tasksPending);
-
-    localStorage.setItem("tasksDone", tasksDoneJson);
-    localStorage.setItem("tasksPending", tasksPendingJson);
-
-    console.log(tasksDone);
-    console.log(tasksPending);
-
-    createTask(e, titleTask);
-  })
-);
-
-renderInfosLS()

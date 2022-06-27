@@ -102,7 +102,7 @@ article main ul{
     padding: 10px;
 }
 
-.task{
+li{
     display: flex;
     align-items: center;
     justify-content: space-between;
