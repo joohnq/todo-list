@@ -37,7 +37,13 @@
                 <h1 class="titleCard">Tarefas Pendentes</h1>
               </header>
               <main>
-                <ul class="ulPending"></ul>
+                <ul class="ulPending">
+                  <li onclick="markCheck(event)" onmouseenter="showCheck(event)" onmouseleave="showCheck(event)">
+                    <img class="disabled" src="assets/images/check.svg">
+                    <p>titulo</p>
+                    <img onclick="deleteTask(event)" src="assets/images/trash.svg">
+                  </li>
+                </ul>
               </main>
               <footer>
                 <button class="btnCreateTask">Clique aqui para adicionar uma tarefa pendente</button>

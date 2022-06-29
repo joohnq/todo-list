@@ -18,6 +18,8 @@ body{
 
 .checked{
     text-decoration: line-through;
+    border-radius: 5px;
+    background-color: gray;
 }
 
 h1{
@@ -29,8 +31,9 @@ img{
     color: white;
 }
 
-li{
-    list-style: none;
+p{
+    width: 300px;
+    word-wrap: break-word;
 }
 
 #todo-list{
@@ -103,9 +106,12 @@ article main ul{
 }
 
 li{
+    list-style: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    padding: 5px;
 
     cursor: pointer;
 

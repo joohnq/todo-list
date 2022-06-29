@@ -17,12 +17,29 @@ function cleanLS() {
   location.reload();
 }
 
-function createTask(titleTask) {
-  const li = document.createElement("li");
-  li.innerHTML = `<p>${titleTask}</p>
-  <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
-  `;
-  return li;
+function createTask(titleTask, done) {
+  if(done == true){
+    const li = document.createElement("li");
+    li.className = 'checked'
+    li.setAttribute('onmouseenter', 'showCheck(event)')
+    li.setAttribute('onmouseleave', 'showCheck(event)')
+    li.setAttribute('onclick', 'markCheck(event)')
+    li.innerHTML = `<img class="disabled" src="assets/images/check.svg">
+    <p>${titleTask}</p>
+    <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
+    `;
+    return li;
+  }else{
+    const li = document.createElement("li");
+    li.setAttribute('onmouseenter', 'showCheck(event)')
+    li.setAttribute('onmouseleave', 'showCheck(event)')
+    li.setAttribute('onclick', 'markCheck(event)')
+    li.innerHTML = `<img class="disabled" src="assets/images/check.svg">
+    <p>${titleTask}</p>
+    <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
+    `;
+    return li;
+  }
 }
 
 function renderTask(tasksDone, tasksPending) {
@@ -37,12 +54,12 @@ function renderTask(tasksDone, tasksPending) {
   ulDone.innerHTML = "";
   ulPending.innerHTML = "";
 
-  tasksDone.forEach((td) => {
-    ulDone.append(createTask(td.title));
+  tasksDone.forEach(td => {
+    ulDone.append(createTask(td.title, true));
   });
 
-  tasksPending.forEach((td) => {
-    ulPending.append(createTask(td.title));
+  tasksPending.forEach(tp => {
+    ulPending.append(createTask(tp.title, false));
   });
 }
 renderTask(tasksDone, tasksPending);
@@ -51,10 +68,10 @@ function saveOnLS(e, titleTask) {
   const ulTask = e.target.parentNode.previousElementSibling.firstElementChild;
 
   if (ulTask.classList.contains("ulDone")) {
-    const newDoneTasks = [...tasksDone, { title: titleTask }];
+    const newDoneTasks = [...tasksDone, { title: titleTask, checked: true}];
     localStorage.setItem("tasksDone", JSON.stringify(newDoneTasks));
   } else if (ulTask.classList.contains("ulPending")) {
-    const newPendingTasks = [...tasksPending, { title: titleTask }];
+    const newPendingTasks = [...tasksPending, { title: titleTask, checked: false }];
     localStorage.setItem("tasksPending", JSON.stringify(newPendingTasks));
   }
 }
@@ -67,10 +84,9 @@ function saveOnLSBeforeDeleted(tasksDone, tasksPending) {
 function deleteTask(e){
   const taskCategory = e.target.parentNode.parentNode
   const titleTask = e.target.previousElementSibling.textContent
-  console.log("🚀 ~ file: script.js ~ line 70 ~ deleteTask ~ titleTask", titleTask)
   if(taskCategory.classList.contains("ulDone")) {
-    tasksDone.find(e => {
-      if(e['title'] == titleTask){
+    tasksDone.filter(e => {
+      if(e.title == titleTask){
         const indexTasksDone = tasksDone.indexOf(e)
         tasksDone.splice(indexTasksDone, (indexTasksDone + 1))
         saveOnLSBeforeDeleted(tasksDone, tasksPending)
@@ -78,8 +94,8 @@ function deleteTask(e){
       }
     })
   } else {
-    tasksPending.find(e => {
-      if(e['title'] == titleTask){
+    tasksPending.filter(e => {
+      if(e.title == titleTask){
         const indexTasksPending = tasksPending.indexOf(e)
         tasksPending.splice(indexTasksPending, (indexTasksPending + 1))
         saveOnLSBeforeDeleted(tasksDone, tasksPending)
@@ -89,8 +105,7 @@ function deleteTask(e){
   }
 }
 
-btnCreateTask.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+function createElement(e) {
     const titleTask = prompt("Digite o título da tarefa:");
 
     if (tasksDone == null) {
@@ -100,11 +115,23 @@ btnCreateTask.forEach((btn) => {
     if (tasksPending == null) {
       tasksPending = [];
     }
-
-    createTask(titleTask);
     saveOnLS(e, titleTask);
     getTasks()
     renderTask(tasksDone, tasksPending);
+}
+
+function showCheck(e){
+  e.target.firstElementChild.classList.toggle('disabled')
+}
+
+function markCheck(e){
+  e.composedPath()[1].classList.toggle('checked')
+  const checked = e.composedPath()[1].classList.contains('checked')
+}
+
+btnCreateTask.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    createElement(e)
   });
 });
 
