@@ -38,11 +38,11 @@
               </header>
               <main>
                 <ul class="ulPending">
-                  <li onclick="markCheck(event)" onmouseenter="showCheck(event)" onmouseleave="showCheck(event)">
-                    <img class="disabled" src="assets/images/check.svg">
-                    <p>titulo</p>
-                    <img onclick="deleteTask(event)" src="assets/images/trash.svg">
-                  </li>
+                  <li class="checked" onclick="markCheck(event)" class=""> <img src="assets/images/check.svg">
+                    <!-- onmouseenter="showCheck(event)" onmouseleave="showCheck(event)" -->
+                    <p>Comer</p>
+                    <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
+                    </li>
                 </ul>
               </main>
               <footer>
