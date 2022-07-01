@@ -23,26 +23,6 @@ function showCheck(e){
 
 function markCheck(e){
   e.composedPath()[1].classList.toggle('checked')
-  // let ulCategoryTask = e.target.parentNode.parentNode
-  // let title = e.target.textContent
-
-  // if(ulCategoryTask.classList.contains('ulDone')){
-  //   ulPending.append(createTask(title, false))
-  //   const newPendingTasks = [...tasksPending, { title: title }];
-  //   localStorage.setItem("tasksPending", JSON.stringify(newPendingTasks));
-  //   // tasksDone.filter(e => {
-  //   //   if(e.title == title){
-  //   //     const indexTasksDone = tasksDone.indexOf(e)
-  //   //     tasksDone.splice(indexTasksDone, (indexTasksDone + 1))
-  //   //     saveOnLSBeforeDeleted(tasksDone, tasksPending)
-  //   //     // renderTask(tasksDone, tasksPending)
-  //   //     console.log(indexTasksDone)
-  //   //   }
-  //   // }) 
-  // }else{
-  //   console.log('pending')
-  // }
-  // console.log(title)
 }
 
 function createTask(titleTask, done) {
@@ -54,7 +34,9 @@ function createTask(titleTask, done) {
     li.setAttribute('onclick', 'markCheck(event)')
     li.innerHTML = `<img class="disabled" src="assets/images/check.svg">
     <p>${titleTask}</p>
-    <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
+    <div>
+    <img onclick="changeTaskTitle(event)" src="assets/images/edit.svg"><img onclick="deleteTask(event)" src="assets/images/trash.svg">
+    </div>
     `;
     return li;
   }else{
@@ -64,15 +46,46 @@ function createTask(titleTask, done) {
     li.setAttribute('onclick', 'markCheck(event)')
     li.innerHTML = `<img class="disabled" src="assets/images/check.svg">
     <p>${titleTask}</p>
-    <img class="delete" onclick="deleteTask(event)" src="assets/images/trash.svg">
+    <div>
+    <img onclick="changeTaskTitle(event)" src="assets/images/edit.svg"><img onclick="deleteTask(event)" src="assets/images/trash.svg">
+    </div>
     `;
     return li;
   }
 }
 
+function changeTaskTitle(e){
+  const ulCategoryTask = e.target.parentNode.parentNode.parentNode
+  const titleTaskOld = e.target.parentNode.previousElementSibling.textContent
+  const titleTaskNew = prompt('Digite o novo titulo da tarefa:')
+  if(ulCategoryTask.classList.contains('ulDone')){
+    tasksDone.filter(t => {
+      if(t.title == titleTaskOld){
+        t.title = titleTaskNew
+        saveOnLSBeforeDeleted(tasksDone, tasksPending)
+        renderTask(tasksDone, tasksPending)
+      }
+    })
+  }else{
+    tasksPending.filter(t => {
+      if(t.title == titleTaskOld){
+        t.title = titleTaskNew
+        saveOnLSBeforeDeleted(tasksDone, tasksPending)
+        renderTask(tasksDone, tasksPending)
+      }
+    })
+  }
+
+}
+
 function renderTask(tasksDone, tasksPending) {
-  tasksDone == null ? tasksDone = []: tasksDone = tasksDone;
-  tasksPending == null ? tasksPending = []: tasksPending = tasksPending;
+  if(tasksDone == null){
+    tasksDone = []
+  }
+
+  if(tasksPending == null){
+    tasksPending = []
+  }
 
   ulDone.innerHTML = "";
   ulPending.innerHTML = "";
@@ -88,9 +101,7 @@ function renderTask(tasksDone, tasksPending) {
 renderTask(tasksDone, tasksPending);
 
 function saveOnLS(e, titleTask) {
-  const ulTask = e.target.parentNode.previousElementSibling.firstElementChild;
-
-  if(ulTask.classList.contains("ulDone")) {
+  if(e.classList.contains("ulDone")) {
     const newDoneTasks = [...tasksDone, { title: titleTask}];
     localStorage.setItem("tasksDone", JSON.stringify(newDoneTasks));
   }else{
@@ -111,15 +122,15 @@ function createElement(e) {
   }else{
     tasksDone == null ? tasksDone = []: tasksDone = tasksDone;
     tasksPending == null ? tasksPending = []: tasksPending = tasksPending;
-    saveOnLS(e, titleTask);
+    saveOnLS(e.target.parentNode.previousElementSibling.firstElementChild, titleTask);
     getTasks()
     renderTask(tasksDone, tasksPending);
   }
 }
 
 function deleteTask(e){
-  const taskCategory = e.target.parentNode.parentNode
-  const titleTask = e.target.previousElementSibling.textContent
+  const taskCategory = e.target.parentNode.parentNode.parentNode
+  const titleTask = e.target.parentNode.previousElementSibling.textContent
   if(taskCategory.classList.contains("ulDone")) {
     tasksDone.filter(e => {
       if(e.title == titleTask){
