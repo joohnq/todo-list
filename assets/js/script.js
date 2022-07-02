@@ -22,7 +22,32 @@ function showCheck(e){
 }
 
 function markCheck(e){
+  const li = e.target.parentNode
+  const titleTask = e.target.textContent
   e.composedPath()[1].classList.toggle('checked')
+  if(li.classList.contains('checked')){
+    tasksPending.filter(e => {
+      if(e.title == titleTask){
+        const index = tasksPending.indexOf(e)
+        const taskInTranfer = tasksPending.slice(index, (index + 1))
+        tasksPending.splice(index, (index + 1))
+        tasksDone.push(taskInTranfer[0])
+        saveOnLSBeforeDeleted(tasksDone, tasksPending)
+        renderTask(tasksDone, tasksPending)
+      }
+    })
+  }else{
+    tasksDone.filter(e => {
+      if(e.title == titleTask){
+        const index = tasksDone.indexOf(e)
+        const taskInTranfer = tasksDone.slice(index, (index + 1))
+        tasksDone.splice(index, (index + 1))
+        tasksPending.push(taskInTranfer[0])
+        saveOnLSBeforeDeleted(tasksDone, tasksPending)
+        renderTask(tasksDone, tasksPending)
+      }
+    })
+  }
 }
 
 function createTask(titleTask, done) {
