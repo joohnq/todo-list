@@ -1,251 +1,253 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,500;0,700;0,900;1,600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,500;0,700;0,900;1,600&display=swap");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background-color: #F3EAF4;
-    margin: 20px;
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f3eaf4;
+  margin: 20px;
 }
 
-.disabled{
-        display: none;
+.disabled {
+  display: none;
 }
 
-.checked{
-    text-decoration: line-through;
-    border-radius: 5px;
-    background-color: gray;
+.checked {
+  text-decoration: line-through;
+  border-radius: 5px;
+  background-color: gray;
 }
 
-h1{
-    color: rgb(64, 64, 64);
+h1 {
+  color: rgb(64, 64, 64);
 }
 
-img{
-    width: 20px;
-    color: white;
-    margin-left: 7px;
+img {
+  width: 20px;
+  color: white;
+  margin-left: 7px;
 }
 
-li div{
-    padding: 5px;
+li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px;
+
+  cursor: pointer;
+
+  margin-bottom: 10px;
 }
 
-li div img{
-    width: 25px;
-    margin-left: 7px;
+li div {
+  padding: 5px;
 }
 
-p{
+li div img {
+  width: 25px;
+  margin-left: 7px;
+}
+
+p {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+#todo-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#todo-list > h1 {
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+}
+
+#todo-list > button {
+  padding: 10px;
+
+  font-family: "Poppins", sans-serif;
+
+  border: 1px solid rgb(64, 64, 64);
+
+  margin-top: 5px;
+
+  border-radius: 20px;
+}
+
+.card {
+  color: white;
+
+  max-width: 400px;
+
+  border-radius: 20px;
+  border: 2px solid #a7a7a7;
+
+  margin-top: 20px;
+}
+
+.cardDone article main {
+  background-color: forestgreen;
+}
+
+.cardPending article main {
+  background-color: crimson;
+}
+
+article header {
+  background-color: white;
+
+  border-radius: 18px 18px 0 0;
+
+  padding: 5px 0 5px 30px;
+
+  border-bottom: 1px solid #a7a7a7;
+}
+
+.titleCard {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+article main {
+  min-height: 100px;
+}
+
+article main ul {
+  padding: 10px;
+}
+
+.btnCreateTask {
+  width: 100%;
+  background-color: white;
+
+  border-radius: 0 0 18px 18px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+
+  padding: 10px 10px;
+
+  border: none;
+
+  border-top: 1px solid #a7a7a7;
+
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  #todo-list > section {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  body {
+    margin: 10px 5px;
+  }
+
+  p {
     width: 70%;
-    word-wrap: break-word;
-}
+  }
 
-#todo-list{
+  li div {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
+    gap: 10px;
+    padding: 0;
+  }
 
-#todo-list > h1{
-    font-size: 40px;
-    font-weight: 900;
-    text-align: center;
-}
-
-#todo-list > button{
-    padding: 10px;
-
-    font-family: 'Poppins', sans-serif;
-
-    border: 1px solid rgb(64, 64, 64);
-
-    margin-top: 5px;
-
-    border-radius: 20px;
-}
-
-.titleCard{
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.card{
-    color: white;
-
-    max-width: 400px;
-
-    border-radius: 20px;
-    border: 2px solid #a7a7a7;
-
-    margin-top: 20px;
-}
-
-.cardDone article main{
-    background-color: forestgreen;
-}
-
-.cardPending article main{
-    background-color: crimson;
-}
-
-article header{
-    background-color: white;
-
-    border-radius: 18px 18px 0 0;
-
-    padding: 5px 0 5px 30px;
-    
-    border-bottom: 1px solid #a7a7a7;
-}
-
-article main{
-    min-height: 100px;
-}
-
-article main ul{
-    padding: 10px;
-}
-
-li{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 5px;
-
-    cursor: pointer;
-
-    margin-bottom: 10px;
-}
-
-.btnCreateTask{
+  #todo-list > section,
+  .card {
     width: 100%;
-    background-color: white;
+  }
 
-    border-radius: 0 0 18px 18px;
+  .card {
+    margin: 10px auto 5px;
+  }
 
-    font-family: 'Poppins', sans-serif;
-    font-size: .9rem;
-    font-weight: 500;
-    color: black;
-    text-align: center;
-
+  .btnCreateTask {
     padding: 10px 10px;
-
-    border: none;
-
-    border-top: 1px solid #a7a7a7;
-
-    cursor: pointer;
-}
-
-@media (min-width: 900px) {
-    #todo-list > section{
-        display: flex;
-        align-items: center;
-        gap: 40px;
-    }
-}
-
-@media (max-width: 500px) {
-    body{
-        margin: 10px 5px;
-    }
-
-    p{
-        width: 70%;
-    }
-
-    li div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 10px;
-        padding: 0;
-    }
-
-    #todo-list > section,
-    .card{
-        width: 100%;
-    }
-
-    .card{
-        margin: 10px auto 5px;
-    }
-
-    .btnCreateTask{
-        padding: 10px 10px;
-    }
+  }
 }
 
 @media (max-width: 300px) {
-    li p {
-        font-size: 0.9rem;
-    }
-    #todo-list > h1{
-        font-size: 2rem;
-    }
+  li p {
+    font-size: 0.9rem;
+  }
 
-    article header {
-        padding: 5px 0 5px 10px;
-    }
+  #todo-list > h1 {
+    font-size: 2rem;
+  }
 
-    .titleCard{
-        font-size: 1.2rem;
-    }
+  #todo-list > button {
+    font-size: 0.7rem;
+  }
 
-    .btnCreateTask{
-        padding: 5px 5px;
-        font-size: .8rem;
-    }
+  article header {
+    padding: 5px 0 5px 10px;
+  }
 
-    .ulDone, .ulPending{
-        padding: 5px;
-    }
+  .titleCard {
+    font-size: 1.2rem;
+  }
 
-    #todo-list > button{
-        font-size: .7rem;
-    }
+  .ulDone,
+  .ulPending {
+    padding: 5px;
+  }
+
+  .btnCreateTask {
+    padding: 5px 5px;
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 250px) {
-    #todo-list > h1{
-        font-size: 1.5rem;
-    }
+  #todo-list > h1 {
+    font-size: 1.5rem;
+  }
 
-    article header {
-        padding: 5px 0 5px 10px;
-    }
+  article header {
+    padding: 5px 0 5px 10px;
+  }
 
-    .titleCard{
-        font-size: .9rem;
-    }
+  .titleCard {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 200px) {
-    #todo-list > h1{
-        font-size: 1.3rem;
-    }
+  #todo-list > h1 {
+    font-size: 1.3rem;
+  }
 
-    article header {
-        padding: 5px 0 5px 10px;
-    }
+  article header {
+    padding: 5px 0 5px 10px;
+  }
 
-    .titleCard{
-        font-size: .9rem;
-    }
+  .titleCard {
+    font-size: 0.9rem;
+  }
 
-    .btnCreateTask{
-        padding: 5px 5px;
-        font-size: .7rem;
-    }
+  .btnCreateTask {
+    padding: 5px 5px;
+    font-size: 0.7rem;
+  }
 }
